@@ -1,4 +1,4 @@
-#include "farm.h"
+#include "Farm.h"
 #include <iostream>
 
 // Constructor initializes the farm state
