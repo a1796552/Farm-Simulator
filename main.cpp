@@ -19,7 +19,8 @@ void displayFarmMenu() {
     cout << "2. Harvest Crops\n";
     cout << "3. Feed Animals\n";
     cout << "4. Collect Animal Produce\n";
-    cout << "5. Return to Main Menu\n";
+    cout << "5. List Crops and Animals\n";
+    cout << "6. Return to Main Menu\n";
 }
 
 // market menu function
@@ -38,16 +39,18 @@ int main() {
 
     do {
         displayMenu();
-        cout << "Enter your choice: ";
+        cout << "\nEnter your choice: ";
         cin >> choice;
+        cout << endl;
 
         switch (choice) {
-            case 1:
+            case 1: {
                 int farmChoice;
                 do {
                     displayFarmMenu();
-                    cout << "Enter your choice: ";
+                    cout << "\nEnter your choice: ";
                     cin >> farmChoice;
+                    cout << endl;
 
                     switch (farmChoice) {
                         case 1:
@@ -63,20 +66,25 @@ int main() {
                             myFarm.collectProduce();
                             break;
                         case 5:
+                            myFarm.listAssets();  // This will now return to the farm menu after listing
+                            break;
+                        case 6:
                             cout << "Returning to Main Menu...\n";
                             break;
                         default:
                             cout << "Invalid choice. Please try again.\n";
                     }
-                } while (farmChoice != 5);
+                } while (farmChoice != 6);  // Loops the farm menu until "Return to Main Menu" is selected
                 break;
+            }
 
-            case 2:
+            case 2: {
                 int marketChoice;
                 do {
                     displayMarketMenu();
-                    cout << "Enter your choice: ";
+                    cout << "\nEnter your choice: ";
                     cin >> marketChoice;
+                    cout << endl;
 
                     switch (marketChoice) {
                         case 1:
@@ -94,11 +102,12 @@ int main() {
                         default:
                             cout << "Invalid choice. Please try again.\n";
                     }
-                } while (marketChoice != 4);
+                } while (marketChoice != 4);  // Loops the market menu until "Return to Main Menu" is selected
                 break;
+            }
 
             case 3:
-                // yFarm.saveGame();
+                // myFarm.saveGame();
                 break;
 
             case 4:
