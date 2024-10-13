@@ -1,4 +1,4 @@
-#include "animal.h"
+#include "Animal.h"
 #include <iostream>
 
 // Constructor 

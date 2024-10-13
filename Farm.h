@@ -3,29 +3,25 @@
 
 #include <vector>
 #include <string>
-#include "Crop.h"
-#include "Animal.h"
-#include "Weather.h"
-#include "Market.h"
+// #include "Crop.h"
+// #include "Animal.h"
 
 class Farm {
+private:
+    // std::vector<Crop> crops;     // Vector to hold crop objects
+    // std::vector<Animal> animals; // Vector to hold animal objects
+    float balance;               // Player's balance or money
+
 public:
-    Farm();  // Constructor
+    Farm();  // Constructor to initialize balance and other data members
 
-    void manageCrops();  // Method for managing crops
-    void manageAnimals();  // Method for managing animals
+    // Method declarations
+    void plantCrops();           // Method to plant crops
+    void harvestCrops();         // Method to harvest crops
+    void feedAnimals();          // Method to feed animals
+    void collectProduce();       // Method to collect produce from animals
 
-    // Player's balance management
-    float getBalance() const;  // Get player's current balance
-    void addBalance(float amount);  // Add to player's balance
-    void subtractBalance(float amount);  // Subtract from player's balance
+    // Other methods can be added later
+};
 
-    // Time and season management
-    std::string getTime() const;  // Get current time/season as a string
-    void advanceTime();  // Advance time, affects crops and animals
-
-    // Check weather and market prices
-    void checkWeather(Weather& weather) const;  // Display the current weather
-    void checkMarketPrices(Market& market) const;  // Display current market pr
-
-}
+#endif
