@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Farm.h"
 using namespace std;
 
 // main menu function
@@ -79,13 +80,13 @@ int main() {
 
                     switch (marketChoice) {
                         case 1:
-                            myFarm.buyCrops();
+                            // myFarm.buyCrops();
                             break;
                         case 2:
-                            myFarm.sellProduce();
+                            // myFarm.sellProduce();
                             break;
                         case 3:
-                            myFarm.checkMarketPrices();
+                            // myFarm.checkMarketPrices();
                             break;
                         case 4:
                             cout << "Returning to Main Menu...\n";
@@ -97,11 +98,11 @@ int main() {
                 break;
 
             case 3:
-                myFarm.saveGame();
+                // yFarm.saveGame();
                 break;
 
             case 4:
-                myFarm.loadGame();
+                // myFarm.loadGame();
                 break;
 
             case 5:
