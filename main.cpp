@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Farm.h"
+#include "Market.h"
 using namespace std;
 
 // main menu function
@@ -33,9 +34,15 @@ void displayMarketMenu() {
 }
 
 int main() {
+    // declaring variables for player balance, harvested crops, and animal products
+    float playerBalance = 100.0;  // example starting balance
+    int harvestedCrops = 5;       // example number of harvested crops
+    int animalProducts = 3;       // example number of animal products
+
     int choice;
 
     Farm myFarm;  // will have to change based on the name decided for the class
+    Market market; // defining market
 
     do {
         displayMenu();
@@ -88,13 +95,13 @@ int main() {
 
                     switch (marketChoice) {
                         case 1:
-                            // myFarm.buyCrops();
+                            market.buyCrops(playerBalance);  // Call Market method to buy crops
                             break;
                         case 2:
-                            // myFarm.sellProduce();
+                            market.sellProduce(playerBalance, harvestedCrops, animalProducts);  // Call Market method to sell produce
                             break;
                         case 3:
-                            // myFarm.checkMarketPrices();
+                            market.checkMarketPrices();  // Call Market method to check prices
                             break;
                         case 4:
                             cout << "Returning to Main Menu...\n";
