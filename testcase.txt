@@ -1,0 +1,35 @@
+2               // check market menu and player balance
+3               // check market prices
+1               // enter buy seed choice
+1               // choose corn seed to buy
+2               // enter quantity
+4               // return to main menu
+1               // check farm menu
+1               // enter plant seed choice
+Corn            // enter seed type
+3               // checking if farm vector works
+4               
+3               // checking advance day function
+2               // check market menu and player balance
+3               // check market prices update due to new day
+4               
+3               // advance day to check planted corn growthstage
+3 
+3
+3
+2               
+3               // check market prices to match sell value of corn
+4               
+1               
+2               // checking harvest works
+4
+2
+2               // sell produce function checked, updated balance is checked
+4               
+5               // save game is tested, game file save text is created successfully
+7               // exit game
+./farmSim       // restart game
+6               // load game
+2               // check market menu to check balance is loaded from previous save
+4               
+7
