@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <string>
 #include <iostream>
+#include "FarmAsset.h"
 
 class Inventory {
 private:

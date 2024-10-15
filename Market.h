@@ -2,27 +2,29 @@
 #define MARKET_H
 
 #include <iostream>
+#include <vector>
+#include "Inventory.h"
 
 class Market {
 private:
-    float cropPrice;
-    float animalProducePrice;
+    float cornPrice;
+    float wheatPrice;
 
     void generateRandomPrices();  // Private helper function to generate random prices
 
 public:
     Market();  // constructor
 
-    // updating the prices randomly for crops and animal produce
+    // Function for buying seeds
+    void buySeeds(const std::string& seedType, int quantity, float& balance, Inventory& inventory);
+
+    // Function for updating the prices randomly for crops
     void updatePrices();
 
-    // function for buying crops
-    void buyCrops(float& playerBalance);
+    // Function for selling produce (crops only)
+    float sellProduce(float& playerBalance, Inventory& inventory);
 
-    // function for selling produce (either crops or animal produce)
-    void sellProduce(float& playerBalance, int& harvestedCrops, int& animalProducts);
-
-    // function for displaying current market prices
+    // Function for displaying current market prices
     void checkMarketPrices();
 };
 

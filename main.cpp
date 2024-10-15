@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Farm.h"
 #include "Market.h"
+#include "Inventory.h"
 using namespace std;
 
 // main menu function
@@ -10,9 +11,9 @@ void displayMenu() {
     cout << "2. Market\n";
     cout << "3. Advance day\n";
     cout << "4. Show Inventory\n";
-    cout << "4. Save game\n";
-    cout << "5. Load game\n";
-    cout << "6. Exit\n";
+    cout << "5. Save game\n";
+    cout << "6. Load game\n";
+    cout << "7. Exit\n";
 }
 
 // farm menu function
@@ -20,31 +21,25 @@ void displayFarmMenu() {
     cout << "\n--- Farm Management ---\n";
     cout << "1. Plant Crops\n";
     cout << "2. Harvest Crops\n";
-    cout << "3. Feed Animals\n";
-    cout << "4. Collect Animal Produce\n";
-    cout << "5. List Crops and Animals\n";
-    cout << "6. Return to Main Menu\n";
+    cout << "3. List Crops\n";
+    cout << "4. Return to Main Menu\n";
 }
 
 // market menu function
 void displayMarketMenu() {
     cout << "\n--- Market ---\n";
-    cout << "1. Buy Crops\n";
+    cout << "1. Buy Seeds\n";
     cout << "2. Sell Produce\n";
     cout << "3. Check Market Prices\n";
     cout << "4. Return to Main Menu\n";
 }
 
 int main() {
-    // declaring variables for player balance, harvested crops, and animal products
-    float playerBalance = 100.0;  // example starting balance
-    int harvestedCrops = 5;       // example number of harvested crops
-    int animalProducts = 3;       // example number of animal products
+    
+    Farm myFarm;  // Farm object to manage the farm's state
 
     int choice;
-
-    Farm myFarm;  // will have to change based on the name decided for the class
-    Market market; // defining market
+    Market market; // Market object
 
     do {
         displayMenu();
@@ -69,75 +64,108 @@ int main() {
                             myFarm.harvestCrops();
                             break;
                         case 3:
-                            myFarm.feedAnimals();
+                            myFarm.listAssets();  // List all crops
                             break;
                         case 4:
-                            myFarm.collectProduce();
-                            break;
-                        case 5:
-                            myFarm.listAssets();  // This will now return to the farm menu after listing
-                            break;
-                        case 6:
                             cout << "Returning to Main Menu...\n";
                             break;
                         default:
                             cout << "Invalid choice. Please try again.\n";
                     }
-                } while (farmChoice != 6);  // Loops the farm menu until "Return to Main Menu" is selected
+                } while (farmChoice != 4);  // Loops the farm menu until "Return to Main Menu" is selected
                 break;
             }
 
             case 2: {
                 int marketChoice;
                 do {
-                    displayMarketMenu();
+                    // Display the player's current balance
+                    cout << "\n--- Market ---\n";
+                    cout << "Player's current balance: $" << myFarm.getBalance() << "\n";  // Show balance
+                    
+                    displayMarketMenu();  // Show the market options
                     cout << "\nEnter your choice: ";
                     cin >> marketChoice;
                     cout << endl;
 
                     switch (marketChoice) {
-                        case 1:
-                            market.buyCrops(playerBalance);  // Call Market method to buy crops
+                        case 1: {  // Buy seeds from the market
+                            int seedChoice;
+                            int quantity;
+
+                            // Present options to the user
+                            cout << "Which seed would you like to buy?\n";
+                            cout << "1. Corn ($3.00 per seed)\n";
+                            cout << "2. Wheat ($2.00 per seed)\n";
+                            cout << "Enter your choice: ";
+                            cin >> seedChoice;
+
+                            // Input validation to ensure valid choice
+                            while (seedChoice != 1 && seedChoice != 2) {
+                                cout << "Invalid choice. Please select 1 for Corn or 2 for Wheat: ";
+                                cin >> seedChoice;
+                            }
+
+                            cout << "Enter quantity: ";
+                            cin >> quantity;
+
+                            // Set the seed type based on user choice
+                            string seedType;
+                            if (seedChoice == 1) {
+                                seedType = "Corn";
+                            } else {
+                                seedType = "Wheat";
+                            }
+
+                            // Add seeds to inventory and deduct balance inside Market::buySeeds
+                            market.buySeeds(seedType + " Seeds", quantity, myFarm.getBalance(), myFarm.getInventory());
+
                             break;
-                        case 2:
-                            market.sellProduce(playerBalance, myFarm.getInventory().getItem("Crops"), myFarm.getInventory().getItem("Animal Produce"));  // Call Market method to sell produce
+                        }
+
+                        case 2: {  // Sell crops
+                            market.sellProduce(myFarm.getBalance(), myFarm.getInventory());
                             break;
+                        }
+
                         case 3:
-                            market.checkMarketPrices();  // Call Market method to check prices
+                            market.checkMarketPrices();  // Check market prices
                             break;
                         case 4:
-                        myFarm.showInventory();  // Display inventory
-                        break;
-                        case 5:
                             cout << "Returning to Main Menu...\n";
                             break;
                         default:
                             cout << "Invalid choice. Please try again.\n";
                     }
-                } while (marketChoice != 4);  // Loops the market menu until "Return to Main Menu" is selected
+                } while (marketChoice != 4);
                 break;
             }
+
 
             case 3:
                 myFarm.nextDay(market);   // Advance to next day
                 break;
 
             case 4:
-                // myFarm.saveGame();
+                myFarm.showInventory();  // Show the player's inventory
                 break;
-            
+
             case 5:
-                // myFarm.loadGame();
+                // myFarm.saveGame();
                 break;
 
             case 6:
+                // myFarm.loadGame();
+                break;
+
+            case 7:
                 cout << "Exiting the game. Goodbye!\n";
                 break;
 
             default:
                 cout << "Invalid choice. Please try again.\n";
         }
-    } while (choice != 6);
+    } while (choice != 7);
 
     return 0;
 }

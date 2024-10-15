@@ -2,14 +2,17 @@
 #define CROP_H
 
 #include "CropAsset.h"
-#include <string>  // Include string for std::string
+#include <string>
 
 class Crop : public CropAsset {
 public:
-    Crop(std::string type, float value);  // Constructor declaration
+    Crop(std::string type, float value);  // Only declare the constructor here
 
-    std::string getCropType() const;      // Getter for crop type
-    void produce() override;              // Override produce method
+    // Getter for crop type
+    std::string getCropType() const;
+
+    // Produce method implementation
+    void produce() override;
 };
 
 #endif

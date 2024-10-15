@@ -1,4 +1,5 @@
 #include "Inventory.h"
+#include <iostream>
 
 // Constructor
 Inventory::Inventory() {
@@ -24,17 +25,13 @@ bool Inventory::removeItem(const std::string& itemName, int quantity) {
     }
 }
 
-// Display the current items in the inventory
 void Inventory::displayInventory() const {
-    std::cout << "Current Inventory:\n";
-    if (items.empty()) {
-        std::cout << "Inventory is empty.\n";
-    } else {
-        for (const auto& pair : items) {
-            std::cout << pair.first << ": " << pair.second << "\n";
-        }
+    std::cout << "Inventory:\n";
+    for (const auto& item : items) {
+        std::cout << item.first << ": " << item.second << "\n";  // Display the item name and quantity
     }
 }
+
 
 // Check if an item exists and has enough quantity
 bool Inventory::hasItem(const std::string& itemName, int quantity) const {
@@ -43,8 +40,9 @@ bool Inventory::hasItem(const std::string& itemName, int quantity) const {
 
 // Method to get the quantity of a specific item
 int Inventory::getItem(const std::string& itemName) const {
-    if (items.count(itemName) > 0) {
-        return items.at(itemName);  // Return the quantity of the item
+    auto it = items.find(itemName);
+    if (it != items.end()) {
+        return it->second;  // Return the quantity if the item exists
     }
     return 0;  // Return 0 if the item doesn't exist
 }
