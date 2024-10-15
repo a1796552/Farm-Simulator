@@ -28,7 +28,7 @@ public:
     void showInventory();        // display the inventory
     Inventory& getInventory();   // getter for inventory
     void saveGame(const std::string& filename);  // New method to save game state
-    void loadGame(const std::string& filename);  // New method to load game state
+    void loadGame(const std::string& filename);  // new method to load game state
 
     // destructor to clean up dynamically allocated memory
     ~Farm();
