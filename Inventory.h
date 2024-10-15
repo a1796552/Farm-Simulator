@@ -24,6 +24,9 @@ public:
 
     // Method to check if an item exists and has enough quantity
     bool hasItem(const std::string& itemName, int quantity) const;
+
+    // Method to get the quantity of a specific item
+    int getItem(const std::string& itemName) const;
 };
 
 #endif  // INVENTORY_H

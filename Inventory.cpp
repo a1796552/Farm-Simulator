@@ -40,3 +40,11 @@ void Inventory::displayInventory() const {
 bool Inventory::hasItem(const std::string& itemName, int quantity) const {
     return items.count(itemName) > 0 && items.at(itemName) >= quantity;
 }
+
+// Method to get the quantity of a specific item
+int Inventory::getItem(const std::string& itemName) const {
+    if (items.count(itemName) > 0) {
+        return items.at(itemName);  // Return the quantity of the item
+    }
+    return 0;  // Return 0 if the item doesn't exist
+}
