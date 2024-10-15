@@ -5,6 +5,7 @@
 #include <string>
 #include "Crop.h"
 #include "Animal.h"
+#include "Market.h"
 #include "FarmAsset.h"
 
 class Farm {
@@ -16,7 +17,7 @@ private:
 public:
     Farm();  // Constructor to initialize balance and other data members
 
-    void nextDay();              // Method to advance to next day
+    void nextDay(Market& market);              // Method to advance to next day
     int getDay() const;          // Method to get the current day
     void plantCrops();           // Method to plant crops
     void harvestCrops();         // Method to harvest crops
