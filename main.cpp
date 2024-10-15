@@ -8,9 +8,10 @@ void displayMenu() {
     cout << "Welcome to Farm Management Simulator!\n";
     cout << "1. Farm\n";
     cout << "2. Market\n";
-    cout << "3. Save game\n";
-    cout << "4. Load game\n";
-    cout << "5. Exit\n";
+    cout << "3. Advance day\n";
+    cout << "4. Save game\n";
+    cout << "5. Load game\n";
+    cout << "6. Exit\n";
 }
 
 // farm menu function
@@ -114,21 +115,25 @@ int main() {
             }
 
             case 3:
-                // myFarm.saveGame();
+                myFarm.nextDay();   // Advance to next day
                 break;
 
             case 4:
+                // myFarm.saveGame();
+                break;
+            
+            case 5:
                 // myFarm.loadGame();
                 break;
 
-            case 5:
+            case 6:
                 cout << "Exiting the game. Goodbye!\n";
                 break;
 
             default:
                 cout << "Invalid choice. Please try again.\n";
         }
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }

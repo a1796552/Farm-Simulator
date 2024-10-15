@@ -1,7 +1,7 @@
 #include "Farm.h"
 #include <iostream>
 
-Farm::Farm() {
+Farm::Farm() : day(1) { // Initialize day to 1
     balance = 1000.0f;  // Initialize balance
 }
 
@@ -10,6 +10,21 @@ Farm::~Farm() {
     for (auto asset : assets) {
         delete asset;  // Clean up each dynamically allocated asset
     }
+}
+
+void Farm::nextDay() {
+    day++;
+    std::cout << "Day " << day << " has started!\n";
+
+    // Example: Each day crops grow, and animals produce goods
+    plantCrops();  // Trigger crop growth (this can be changed depending on your game logic)
+    feedAnimals(); // Trigger animal produce
+
+    // You can add more logic here for daily events, weather changes, etc.
+}
+
+int Farm::getDay() const {
+    return day;
 }
 
 // Implement the plantCrops() method with dynamic crop type
