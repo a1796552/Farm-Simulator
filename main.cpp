@@ -115,7 +115,7 @@ int main() {
             }
 
             case 3:
-                myFarm.nextDay();   // Advance to next day
+                myFarm.nextDay(market);   // Advance to next day
                 break;
 
             case 4:

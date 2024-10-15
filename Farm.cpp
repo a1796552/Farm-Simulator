@@ -1,4 +1,5 @@
 #include "Farm.h"
+#include "Market.h"
 #include <iostream>
 
 Farm::Farm() : day(1) { // Initialize day to 1
@@ -12,9 +13,10 @@ Farm::~Farm() {
     }
 }
 
-void Farm::nextDay() {
+void Farm::nextDay(Market& market) {
     day++;
     std::cout << "Day " << day << " has started!\n";
+    market.updatePrices();  // Randomly update market prices for the new day
 
     // Example: Each day crops grow, and animals produce goods
     plantCrops();  // Trigger crop growth (this can be changed depending on your game logic)
