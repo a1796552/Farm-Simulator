@@ -4,6 +4,21 @@
 #include "Inventory.h"
 using namespace std;
 
+// Function to get a valid numeric input
+int getValidInput() {
+    int input;
+    while (true) {
+        cin >> input;
+        if (cin.fail()) {
+            cin.clear(); // clear the error flag
+            cin.ignore(1000, '\n'); // ignore invalid input
+            cout << "Invalid input. Please enter a number: ";
+        } else {
+            return input;
+        }
+    }
+}
+
 // main menu function
 void displayMenu() {
     cout << "Welcome to Farm Management Simulator!\n";
@@ -44,7 +59,7 @@ int main() {
     do {
         displayMenu();
         cout << "\nEnter your choice: ";
-        cin >> choice;
+        choice = getValidInput(); // Use input validation here
         cout << endl;
 
         switch (choice) {
@@ -53,7 +68,7 @@ int main() {
                 do {
                     displayFarmMenu();
                     cout << "\nEnter your choice: ";
-                    cin >> farmChoice;
+                    farmChoice = getValidInput(); // Use input validation here;
                     cout << endl;
 
                     switch (farmChoice) {
@@ -85,7 +100,7 @@ int main() {
                     
                     displayMarketMenu();  // Show the market options
                     cout << "\nEnter your choice: ";
-                    cin >> marketChoice;
+                    marketChoice = getValidInput(); // Use input validation here;
                     cout << endl;
 
                     switch (marketChoice) {
@@ -98,7 +113,7 @@ int main() {
                             cout << "1. Corn ($3.00 per seed)\n";
                             cout << "2. Wheat ($2.00 per seed)\n";
                             cout << "Enter your choice: ";
-                            cin >> seedChoice;
+                            seedChoice = getValidInput(); // Use input validation here;
 
                             // Input validation to ensure valid choice
                             while (seedChoice != 1 && seedChoice != 2) {
@@ -107,7 +122,7 @@ int main() {
                             }
 
                             cout << "Enter quantity: ";
-                            cin >> quantity;
+                            quantity = getValidInput(); // Use input validation here;
 
                             // Set the seed type based on user choice
                             string seedType;
