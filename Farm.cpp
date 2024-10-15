@@ -2,6 +2,7 @@
 #include "Crop.h"
 #include "Animal.h"
 #include "Market.h"
+#include "Inventory.h"
 #include <iostream>
 
 Farm::Farm() : balance(1000.0f), day(1) {}
@@ -9,8 +10,7 @@ Farm::Farm() : balance(1000.0f), day(1) {}
 Farm::~Farm() {
     for (auto asset : assets) {
         delete asset;  // Clean up dynamically allocated assets
-    }
-}
+
 
 void Farm::nextDay(Market& market) {
     day++;
@@ -21,16 +21,17 @@ void Farm::nextDay(Market& market) {
     for (auto& asset : assets) {
         asset->produce();  // Polymorphic call to produce() for both crops and animals
     }
-}
 
 int Farm::getDay() const {
     return day;
 }
 
+// implement the plantCrops() method with dynamic crop type
 void Farm::plantCrops() {
     std::string cropType;
     std::cout << "Enter crop type (e.g., Corn, Wheat): ";
     std::cin >> cropType;
+
     float cropValue = 10.0f;
     assets.push_back(new Crop(cropType, cropValue));  // Add as a CropAsset
     std::cout << "Planted " << cropType << ".\n";
@@ -40,11 +41,12 @@ void Farm::feedAnimals() {
     std::string animalType;
     std::cout << "Enter animal type (e.g., Cow, Chicken): ";
     std::cin >> animalType;
+
     float animalValue = 50.0f;
     assets.push_back(new Animal(animalType, animalValue));  // Add as an AnimalAsset
     std::cout << "Added " << animalType << ".\n";
 }
-
+  
 void Farm::harvestCrops() {
     for (auto it = assets.begin(); it != assets.end();) {
         CropAsset* crop = dynamic_cast<CropAsset*>(*it);
@@ -70,6 +72,7 @@ void Farm::collectProduce() {
 void Farm::listAssets() {
     if (assets.empty()) {
         std::cout << "No crops or animals on the farm.\n";
+        inventory.displayInventory();
         return;
     }
 
@@ -85,4 +88,13 @@ void Farm::listAssets() {
             std::cout << "Animal: " << animal->getName() << " (Health: " << animal->getHealth() << ")\n";
         }
     }
+}
+
+// displaying inventory
+void Farm::showInventory() {
+    inventory.displayInventory();
+}
+
+Inventory& Farm::getInventory() {
+    return inventory;  // return the inventory object
 }
