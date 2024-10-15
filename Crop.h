@@ -6,12 +6,12 @@
 
 class Crop : public CropAsset {
 public:
-    Crop(std::string type, float value);  // Only declare the constructor here
+    Crop(std::string type, float value);  //constructor
 
-    // Getter for crop type
+    // crop type getter
     std::string getCropType() const;
 
-    // Produce method implementation
+    // implements produce growth 
     void produce() override;
 };
 
