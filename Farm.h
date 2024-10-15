@@ -9,13 +9,15 @@
 
 class Farm {
 private:
-    std::vector<FarmAsset*> assets; // Vectir to hold both crops and animal vectors
-    float balance;               // Player's balance or money
+    std::vector<FarmAsset*> assets; // Vector to hold both crops and animal vectors
+    float balance;                  // Player's balance or money
+    int day;                        //tracking the day
 
 public:
     Farm();  // Constructor to initialize balance and other data members
 
-    // Method declarations
+    void nextDay();              // Method to advance to next day
+    int getDay() const;          // Method to get the current day
     void plantCrops();           // Method to plant crops
     void harvestCrops();         // Method to harvest crops
     void feedAnimals();          // Method to feed animals
