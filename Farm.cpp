@@ -2,6 +2,7 @@
 #include "Crop.h"
 #include "Market.h"
 #include "Inventory.h"
+#include <fstream>
 #include <iostream>
 
 Farm::Farm() : balance(50.0f), day(1) {}
@@ -92,4 +93,67 @@ void Farm::showInventory() {
 
 Inventory& Farm::getInventory() {
     return inventory;  // return the inventory object
+}
+
+// Save game state to a file
+void Farm::saveGame(const std::string& filename) {
+    std::ofstream file(filename);
+    
+    if (!file) {
+        std::cerr << "Error opening file for saving!\n";
+        return;
+    }
+
+    // Save basic game info
+    file << day << "\n";
+    file << balance << "\n";
+
+    // Save inventory
+    file << inventory;  // Assuming you have an overloaded operator<< for Inventory
+
+    // Save assets (crops)
+    for (auto& asset : assets) {
+        Crop* crop = dynamic_cast<Crop*>(asset);
+        if (crop) {
+            file << crop->getName() << " " << crop->getGrowthStage() << "\n";
+        }
+    }
+
+    file.close();
+    std::cout << "Game saved successfully to " << filename << "\n";
+}
+
+// Load game state from a file
+void Farm::loadGame(const std::string& filename) {
+    std::ifstream file(filename);
+    
+    if (!file) {
+        std::cerr << "Error opening file for loading!\n";
+        return;
+    }
+
+    // Clear current state
+    for (auto asset : assets) {
+        delete asset;
+    }
+    assets.clear();
+
+    // Load basic game info
+    file >> day;
+    file >> balance;
+
+    // Load inventory
+    file >> inventory;  // Assuming you have an overloaded operator>> for Inventory
+
+    // Load assets (crops)
+    std::string cropName;
+    int growthStage;
+    while (file >> cropName >> growthStage) {
+        Crop* crop = new Crop(cropName, 10.0f);
+        crop->setGrowthStage(growthStage);
+        assets.push_back(crop);
+    }
+
+    file.close();
+    std::cout << "Game loaded successfully from " << filename << "\n";
 }

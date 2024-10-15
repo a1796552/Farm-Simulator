@@ -46,3 +46,22 @@ int Inventory::getItem(const std::string& itemName) const {
     }
     return 0;  // Return 0 if the item doesn't exist
 }
+
+// Save inventory to file
+std::ostream& operator<<(std::ostream& os, const Inventory& inventory) {
+    // Loop through each item and save it
+    for (const auto& item : inventory.items) {
+        os << item.first << " " << item.second << "\n";
+    }
+    return os;
+}
+
+// Load inventory from file
+std::istream& operator>>(std::istream& is, Inventory& inventory) {
+    std::string itemName;
+    int quantity;
+    while (is >> itemName >> quantity) {
+        inventory.addItem(itemName, quantity);
+    }
+    return is;
+}

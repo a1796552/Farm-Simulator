@@ -11,37 +11,26 @@ protected:
     bool isHarvestable;
 
 public:
-    CropAsset(float value, std::string cropName, int maxGrowth = 3)  // Added maxGrowth as a parameter
-        : FarmAsset(value, cropName), growthStage(0), maxGrowthStage(maxGrowth), isHarvestable(false) {}
+    // Constructor with maxGrowth as a parameter
+    CropAsset(float value, std::string cropName, int maxGrowth = 3);
 
     // Increment the growth stage
-    virtual void grow() {
-        if (growthStage < maxGrowthStage) {
-            growthStage++;
-            if (growthStage >= maxGrowthStage) {  // Crop is harvestable if fully grown
-                isHarvestable = true;
-            }
-        }
-    }
+    virtual void grow();
 
     // Check if crop is harvestable
-    virtual bool getIsHarvestable() const {
-        return isHarvestable;
-    }
+    virtual bool getIsHarvestable() const;
+
+    // Setter for growth stage
+    virtual void setGrowthStage(int newGrowthStage);
 
     // Get the current growth stage
-    virtual int getGrowthStage() const {
-        return growthStage;
-    }
+    virtual int getGrowthStage() const;
 
     // Get the maximum growth stage
-    virtual int getMaxGrowthStage() const {
-        return maxGrowthStage;
-    }
+    virtual int getMaxGrowthStage() const;
 
     // Pure virtual function to be implemented by derived classes
     virtual void produce() override = 0;  // Derived classes should implement how they grow
 };
 
-#endif
-
+#endif  // CROPASSET_H

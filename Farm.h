@@ -3,8 +3,9 @@
 
 #include <vector>
 #include <string>
-#include "CropAsset.h"   // Include the new CropAsset class
-#include "FarmAsset.h"    // Base class
+#include <fstream>
+#include "CropAsset.h"
+#include "FarmAsset.h"
 #include "Market.h"
 
 class Farm {
@@ -26,6 +27,8 @@ public:
     void setBalance(float newBalance);
     void showInventory();        // display the inventory
     Inventory& getInventory();   // getter for inventory
+    void saveGame(const std::string& filename);  // New method to save game state
+    void loadGame(const std::string& filename);  // New method to load game state
 
     // destructor to clean up dynamically allocated memory
     ~Farm();

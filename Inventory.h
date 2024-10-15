@@ -4,7 +4,6 @@
 #include <unordered_map>
 #include <string>
 #include <iostream>
-#include "FarmAsset.h"
 
 class Inventory {
 private:
@@ -28,6 +27,12 @@ public:
 
     // Method to get the quantity of a specific item
     int getItem(const std::string& itemName) const;
+
+    // Overloading the << operator for output
+    friend std::ostream& operator<<(std::ostream& os, const Inventory& inventory);
+
+    // Overloading the >> operator for input
+    friend std::istream& operator>>(std::istream& is, Inventory& inventory);
 };
 
 #endif  // INVENTORY_H

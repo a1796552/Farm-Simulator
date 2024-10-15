@@ -151,11 +151,11 @@ int main() {
                 break;
 
             case 5:
-                // myFarm.saveGame();
+                myFarm.saveGame("savegame.txt");
                 break;
 
             case 6:
-                // myFarm.loadGame();
+                myFarm.loadGame("savegame.txt");
                 break;
 
             case 7:
