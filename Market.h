@@ -21,7 +21,7 @@ public:
     // Function for updating the prices randomly for crops
     void updatePrices();
 
-    // Function for selling produce (crops only)
+    // Function for selling produce 
     float sellProduce(float& playerBalance, Inventory& inventory);
 
     // Function for displaying current market prices
