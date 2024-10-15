@@ -9,6 +9,7 @@ void displayMenu() {
     cout << "1. Farm\n";
     cout << "2. Market\n";
     cout << "3. Advance day\n";
+    cout << "4. Show Inventory\n";
     cout << "4. Save game\n";
     cout << "5. Load game\n";
     cout << "6. Exit\n";
@@ -99,12 +100,15 @@ int main() {
                             market.buyCrops(playerBalance);  // Call Market method to buy crops
                             break;
                         case 2:
-                            market.sellProduce(playerBalance, harvestedCrops, animalProducts);  // Call Market method to sell produce
+                            market.sellProduce(playerBalance, myFarm.getInventory().getItem("Crops"), myFarm.getInventory().getItem("Animal Produce"));  // Call Market method to sell produce
                             break;
                         case 3:
                             market.checkMarketPrices();  // Call Market method to check prices
                             break;
                         case 4:
+                        myFarm.showInventory();  // Display inventory
+                        break;
+                        case 5:
                             cout << "Returning to Main Menu...\n";
                             break;
                         default:
