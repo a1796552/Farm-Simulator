@@ -9,9 +9,13 @@ Market::Market() {
 }
 
 // for randomly updating prices for crops and animal produce
-void Market::updatePrices() {
+void Market::generateRandomPrices() {
     cropPrice = (rand() % 21) + 10;  // random price between 10 and 30
     animalProducePrice = (rand() % 16) + 5;  // random price between 5 and 20
+}
+
+void Market::updatePrices() {
+    generateRandomPrices();
 }
 
 // function for buying crops

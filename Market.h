@@ -8,11 +8,13 @@ private:
     float cropPrice;
     float animalProducePrice;
 
-    // updating the prices randomly for crops and animal produce
-    void updatePrices();
+    void generateRandomPrices();  // Private helper function to generate random prices
 
 public:
     Market();  // constructor
+
+    // updating the prices randomly for crops and animal produce
+    void updatePrices();
 
     // function for buying crops
     void buyCrops(float& playerBalance);
