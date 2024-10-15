@@ -1,10 +1,10 @@
 #include "CropAsset.h"
 
-// Constructor implementation
+// constructor 
 CropAsset::CropAsset(float value, std::string cropName, int maxGrowth)
     : FarmAsset(value, cropName), growthStage(0), maxGrowthStage(maxGrowth), isHarvestable(false) {}
 
-// Increment the growth stage
+// incrementing growth stage
 void CropAsset::grow() {
     if (growthStage < maxGrowthStage) {
         growthStage++;
@@ -14,22 +14,22 @@ void CropAsset::grow() {
     }
 }
 
-// Check if crop is harvestable
+// check if crop can be harvested
 bool CropAsset::getIsHarvestable() const {
     return isHarvestable;
 }
 
-// Setter for growth stage
+// growth stage setter
 void CropAsset::setGrowthStage(int newGrowthStage) {
     growthStage = newGrowthStage;
 }
 
-// Get the current growth stage
+// retrieves growth stage
 int CropAsset::getGrowthStage() const {
     return growthStage;
 }
 
-// Get the maximum growth stage
+// returns max growth stage
 int CropAsset::getMaxGrowthStage() const {
     return maxGrowthStage;
 }
