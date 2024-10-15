@@ -8,12 +8,6 @@ Animal::Animal(std::string type, float health, bool producing)
     if (type == "Cow") {
         produceValue = 15.0;  // milk val
         sellValue = 100.0;  // cow val
-    } else if (type == "Chicken") {
-        produceValue = 5.0;  // egg val
-        sellValue = 20.0;  // chicken val
-    } else if (type == "Sheep") {
-        produceValue = 10.0;  // wool val
-        sellValue = 50.0;  // sheep val
     }
 }
 
