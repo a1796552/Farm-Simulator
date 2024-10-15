@@ -9,7 +9,7 @@ Farm::Farm() : balance(50.0f), day(1) {}
 
 Farm::~Farm() {
     for (auto asset : assets) {
-        delete asset;  // Clean up dynamically allocated assets
+        delete asset;  // cleans dynamically allocated assets
     }
 }
 
@@ -17,11 +17,11 @@ void Farm::nextDay(Market& market) {
     day++;
     std::cout << "Day " << day << " has started!\n";
 
-    market.updatePrices();  // Call market to update prices
+    market.updatePrices();  // call market to update prices
 
-    // Call produce() for all assets (crops only now)
+    // call produce() for all assets
     for (auto& asset : assets) {
-        asset->produce();  // This will call Crop::produce() for crops, which grows them
+        asset->produce();  // calls crop::produce for crops to grow them
     }
 }
 
@@ -29,15 +29,15 @@ int Farm::getDay() const {
     return day;
 }
 
-// implement the plantCrops() method with dynamic crop type
+// implement the plantCrops method with dynamic crop type
 void Farm::plantCrops() {
     std::string cropType;
     std::cout << "Enter crop type to plant (Wheat or Corn): ";
     std::cin >> cropType;
 
-    if (inventory.hasItem(cropType + " Seeds", 1)) {  // Check if the player has the seeds
-        inventory.removeItem(cropType + " Seeds", 1);  // Use one seed from the inventory
-        assets.push_back(new Crop(cropType, 10.0f));  // Plant the crop
+    if (inventory.hasItem(cropType + " Seeds", 1)) {  // check if the player has seeds
+        inventory.removeItem(cropType + " Seeds", 1);  // use one seed from the inventory
+        assets.push_back(new Crop(cropType, 10.0f));  // plant crops
         std::cout << "Planted " << cropType << ".\n";
     } else {
         std::cout << "You do not have any " << cropType << " seeds.\n";
@@ -47,22 +47,22 @@ void Farm::plantCrops() {
 void Farm::harvestCrops() {
     for (auto it = assets.begin(); it != assets.end();) {
         Crop* crop = dynamic_cast<Crop*>(*it);
-        if (crop && crop->getIsHarvestable()) {  // Check if the crop is ready for harvest
+        if (crop && crop->getIsHarvestable()) {  // check if the crop is ready for harvest
             std::cout << "Harvested " << crop->getName() << ".\n";
             
-            // Add the harvested crop to the inventory (e.g., as "Wheat" or "Corn")
-            inventory.addItem(crop->getName(), 1);  // Add 1 of the harvested crop to the inventory
+            // add harvested crop to the inventory 
+            inventory.addItem(crop->getName(), 1);  // add 1 of the harvested crop to the inventory
             
-            // Remove the harvested crop from the farm
-            delete crop;  // Free the memory
-            it = assets.erase(it);  // Remove from assets list and update the iterator
+            // remove the harvested crop from the farm
+            delete crop;  // free the memory
+            it = assets.erase(it);  // remove from assets list and update the iterator
         } else {
             ++it;
         }
     }
 }
 
-// Getter for player's balance
+// getter for player's balance
 float& Farm::getBalance() {
     return balance;
 }
@@ -95,7 +95,7 @@ Inventory& Farm::getInventory() {
     return inventory;  // return the inventory object
 }
 
-// Save game state to a file
+// save game state to a file
 void Farm::saveGame(const std::string& filename) {
     std::ofstream file(filename);
     
@@ -104,14 +104,14 @@ void Farm::saveGame(const std::string& filename) {
         return;
     }
 
-    // Save basic game info
+    // save basic game info
     file << day << "\n";
     file << balance << "\n";
 
-    // Save inventory
-    file << inventory;  // Assuming you have an overloaded operator<< for Inventory
-
-    // Save assets (crops)
+    // save inventory
+    file << inventory;  
+    
+    // save assets
     for (auto& asset : assets) {
         Crop* crop = dynamic_cast<Crop*>(asset);
         if (crop) {
@@ -123,7 +123,7 @@ void Farm::saveGame(const std::string& filename) {
     std::cout << "Game saved successfully to " << filename << "\n";
 }
 
-// Load game state from a file
+// load game state from a file
 void Farm::loadGame(const std::string& filename) {
     std::ifstream file(filename);
     
@@ -132,20 +132,20 @@ void Farm::loadGame(const std::string& filename) {
         return;
     }
 
-    // Clear current state
+    // clear current state
     for (auto asset : assets) {
         delete asset;
     }
     assets.clear();
 
-    // Load basic game info
+    // load basic game info
     file >> day;
     file >> balance;
 
     // Load inventory
-    file >> inventory;  // Assuming you have an overloaded operator>> for Inventory
+    file >> inventory;  
 
-    // Load assets (crops)
+    // load assets 
     std::string cropName;
     int growthStage;
     while (file >> cropName >> growthStage) {
