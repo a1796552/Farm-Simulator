@@ -8,13 +8,13 @@ Inventory::Inventory() {
 
 // Add items to the inventory
 void Inventory::addItem(const std::string& itemName, int quantity) {
-    items[itemName] += quantity;  // Add quantity to the existing item or create a new one
+    items[itemName] += quantity;  
 }
 
 // Remove items from the inventory
 bool Inventory::removeItem(const std::string& itemName, int quantity) {
     if (items[itemName] >= quantity) {
-        items[itemName] -= quantity;  // Deduct the quantity
+        items[itemName] -= quantity;  // Reduce the quantity
         if (items[itemName] == 0) {
             items.erase(itemName);  // Remove the item if quantity becomes 0
         }
@@ -42,7 +42,7 @@ bool Inventory::hasItem(const std::string& itemName, int quantity) const {
 int Inventory::getItem(const std::string& itemName) const {
     auto it = items.find(itemName);
     if (it != items.end()) {
-        return it->second;  // Return the quantity if the item exists
+        return it->second;  // Return the quantity if item exists
     }
     return 0;  // Return 0 if the item doesn't exist
 }
