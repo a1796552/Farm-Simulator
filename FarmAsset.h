@@ -1,18 +1,18 @@
 #ifndef FARMASSET_H
 #define FARMASSET_H
 
-#include <string>  // Include the string header
+#include <string>  // include the string header
 
 class FarmAsset {
 protected:
-    float value;        // Asset's value
-    std::string name;   // Asset's name
+    float value;        // asset's value
+    std::string name;   // asset's name
 
 public:
     FarmAsset(float val, std::string assetName)
-        : value(val), name(assetName) {}  // Constructor initializes value and name
+        : value(val), name(assetName) {}  // constructor initializes value and name
 
-    virtual void produce() = 0;  // Pure virtual function
+    virtual void produce() = 0;  // pure virtual function
 
     float getValue() const { return value; }
     std::string getName() const { return name; }
