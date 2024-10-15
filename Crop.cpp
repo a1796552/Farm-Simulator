@@ -1,28 +1,18 @@
 #include "Crop.h"
+#include <iostream>
 
-// Implement the constructor
+// Constructor definition
 Crop::Crop(std::string type, float value)
-    : FarmAsset(type, value), cropType(type), growthStage(0), isHarvestable(false) {}
+    : CropAsset(value, type)  // Call CropAsset constructor
+{}
 
-// Implement the grow method
-void Crop::grow() {
-    growthStage++;
-    if (growthStage >= 3) {
-        isHarvestable = true;
-    }
-}
-
-// Implement the produce method (calls grow)
-void Crop::produce() {
-    grow();
-}
-
-// Implement the getter for harvestable status
-bool Crop::getIsHarvestable() const {
-    return isHarvestable;
-}
-
-// Implement the getter for crop type
+// Getter for crop type
 std::string Crop::getCropType() const {
-    return cropType;
+    return name;  // Assuming 'name' in the base class is the crop type
+}
+
+// Produce method implementation
+void Crop::produce() {
+    grow();  // Example: crops "produce" by growing
+    std::cout << name << " has grown.\n";
 }
