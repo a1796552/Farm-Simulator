@@ -3,10 +3,10 @@
 
 #include <vector>
 #include <string>
-#include "Crop.h"
-#include "Animal.h"
+#include "CropAsset.h"   // Include the new CropAsset class
+#include "AnimalAsset.h"  // Include AnimalAsset class
+#include "FarmAsset.h"    // Base class
 #include "Market.h"
-#include "FarmAsset.h"
 
 class Farm {
 private:

@@ -1,28 +1,26 @@
 #include "Farm.h"
+#include "Crop.h"
+#include "Animal.h"
 #include "Market.h"
 #include "Inventory.h"
 #include <iostream>
 
-Farm::Farm() : day(1) { // initialize day to 1
-    balance = 1000.0f;  // initialize balance
-}
+Farm::Farm() : balance(1000.0f), day(1) {}
 
-// destructor to clean up dynamically allocated memory
 Farm::~Farm() {
     for (auto asset : assets) {
-        delete asset;  // clean up each dynamically allocated asset
-    }
-}
+        delete asset;  // Clean up dynamically allocated assets
+
 
 void Farm::nextDay(Market& market) {
     day++;
     std::cout << "Day " << day << " has started!\n";
-    market.updatePrices();  // randomly update market prices for the new day
 
-    // each day crops grow, and animals produce goods
-    plantCrops();  // trigger crop growth 
-    feedAnimals(); // trigger animal produce
-}
+    market.updatePrices(); // Call market to update prices
+
+    for (auto& asset : assets) {
+        asset->produce();  // Polymorphic call to produce() for both crops and animals
+    }
 
 int Farm::getDay() const {
     return day;
@@ -34,46 +32,43 @@ void Farm::plantCrops() {
     std::cout << "Enter crop type (e.g., Corn, Wheat): ";
     std::cin >> cropType;
 
-    float cropValue = 10.0f;  // can adjust this based on crop type
-    assets.push_back(new Crop(cropType, cropValue));  // dynamically add crop
-    inventory.addItem(cropType, 5);
+    float cropValue = 10.0f;
+    assets.push_back(new Crop(cropType, cropValue));  // Add as a CropAsset
     std::cout << "Planted " << cropType << ".\n";
 }
 
-// implement the feedAnimals() method with dynamic animal type
 void Farm::feedAnimals() {
     std::string animalType;
     std::cout << "Enter animal type (e.g., Cow, Chicken): ";
     std::cin >> animalType;
 
-    float animalValue = 50.0f;  // can adjust this based on animal type
-    assets.push_back(new Animal(animalType, animalValue));  // dynamically add animal
+    float animalValue = 50.0f;
+    assets.push_back(new Animal(animalType, animalValue));  // Add as an AnimalAsset
     std::cout << "Added " << animalType << ".\n";
 }
-
-// implement the harvestCrops() method
+  
 void Farm::harvestCrops() {
-    for (auto& asset : assets) {
-        Crop* crop = dynamic_cast<Crop*>(asset);
+    for (auto it = assets.begin(); it != assets.end();) {
+        CropAsset* crop = dynamic_cast<CropAsset*>(*it);
         if (crop && crop->getIsHarvestable()) {
-            std::cout << "Harvested " << crop->getName() << " (" << crop->getCropType() << ").\n";
-            inventory.addItem("Crops", 5);
+            std::cout << "Harvested " << crop->getName() << ".\n";
+            delete crop;
+            it = assets.erase(it);
+        } else {
+            ++it;
         }
     }
 }
 
-// implement the collectProduce() method
 void Farm::collectProduce() {
     for (auto& asset : assets) {
-        Animal* animal = dynamic_cast<Animal*>(asset);
-        if (animal && animal->getHealth() > 50) {
-            std::cout << "Collected produce from " << animal->getName() << " (" << animal->getAnimalType() << ").\n";
-            inventory.addItem("Animal Produce", 3);
+        AnimalAsset* animal = dynamic_cast<AnimalAsset*>(asset);  // Correct cast
+        if (animal && animal->getHealth() > 50 && animal->isProducingGoods()) {  // Check if producing goods
+            std::cout << "Collected produce from " << animal->getName() << ".\n";
         }
     }
 }
 
-// implement the listAssets() method to display crops and animals on the farm
 void Farm::listAssets() {
     if (assets.empty()) {
         std::cout << "No crops or animals on the farm.\n";
@@ -82,16 +77,15 @@ void Farm::listAssets() {
     }
 
     std::cout << "Listing all crops and animals on the farm:\n";
-
     for (auto& asset : assets) {
-        Crop* crop = dynamic_cast<Crop*>(asset);
+        CropAsset* crop = dynamic_cast<CropAsset*>(asset);
         if (crop) {
-            std::cout << "Crop: " << crop->getCropType() << " (Growth Stage: " << crop->getIsHarvestable() << ")\n";
+            std::cout << "Crop: " << crop->getName() << " (Growth Stage: " << crop->getIsHarvestable() << ")\n";
         }
 
-        Animal* animal = dynamic_cast<Animal*>(asset);
+        AnimalAsset* animal = dynamic_cast<AnimalAsset*>(asset);
         if (animal) {
-            std::cout << "Animal: " << animal->getAnimalType() << " (Health: " << animal->getHealth() << ")\n";
+            std::cout << "Animal: " << animal->getName() << " (Health: " << animal->getHealth() << ")\n";
         }
     }
 }

@@ -1,32 +1,23 @@
 #ifndef FARMASSET_H
 #define FARMASSET_H
 
-#include <string>
+#include <string>  // Include the string header
 
 class FarmAsset {
 protected:
-    std::string name;  // Name of the asset (for both crops and animals)
-    float value;       // Value of the asset (could represent market value or produce value)
+    float value;        // Asset's value
+    std::string name;   // Asset's name
 
 public:
-    // Constructor
-    FarmAsset(std::string assetName, float assetValue)
-        : name(assetName), value(assetValue) {}
+    FarmAsset(float val, std::string assetName)
+        : value(val), name(assetName) {}  // Constructor initializes value and name
 
-    // Virtual destructor to ensure proper cleanup of derived classes
-    virtual ~FarmAsset() {}
+    virtual void produce() = 0;  // Pure virtual function
 
-    // Virtual method to be overridden by derived classes (for producing or growing)
-    virtual void produce() = 0;
-
-    // Getter for the name
+    float getValue() const { return value; }
     std::string getName() const { return name; }
 
-    // Getter for the value
-    float getValue() const { return value; }
-
-    // Setter for the value
-    void setValue(float newValue) { value = newValue; }
+    virtual ~FarmAsset() {}
 };
 
 #endif

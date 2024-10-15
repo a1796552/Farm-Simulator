@@ -1,23 +1,15 @@
 #ifndef CROP_H
 #define CROP_H
 
-#include "FarmAsset.h"
+#include "CropAsset.h"
+#include <string>  // Include string for std::string
 
-class Crop : public FarmAsset {
-private:
-    std::string cropType;
-    int growthStage;
-    bool isHarvestable;
-
+class Crop : public CropAsset {
 public:
-    // Constructor declaration
-    Crop(std::string type, float value);
+    Crop(std::string type, float value);  // Constructor declaration
 
-    // Method declarations (no definitions here)
-    void grow(); 
-    void produce() override;
-    bool getIsHarvestable() const;
-    std::string getCropType() const;
+    std::string getCropType() const;      // Getter for crop type
+    void produce() override;              // Override produce method
 };
 
 #endif

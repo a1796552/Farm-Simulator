@@ -1,23 +1,15 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
 
-#include "FarmAsset.h"
+#include "AnimalAsset.h"
+#include <string>  // Include the string header for std::string
 
-class Animal : public FarmAsset {
-private:
-    std::string animalType;
-    int health;
-    bool isProducing;
-
+class Animal : public AnimalAsset {
 public:
-    // Constructor declaration
-    Animal(std::string type, float value);
+    Animal(std::string type, float value);  // Constructor with string and float parameters
 
-    // Method declarations (no definitions here)
-    void feed();
-    void produce() override;
-    int getHealth() const;
-    std::string getAnimalType() const;
+    std::string getAnimalType() const;  // Getter for animal type
+    void produce() override;  // Override produce method
 };
 
 #endif
