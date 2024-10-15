@@ -10,7 +10,8 @@ Farm::Farm() : balance(1000.0f), day(1) {}
 Farm::~Farm() {
     for (auto asset : assets) {
         delete asset;  // Clean up dynamically allocated assets
-
+    }
+}
 
 void Farm::nextDay(Market& market) {
     day++;
@@ -21,6 +22,7 @@ void Farm::nextDay(Market& market) {
     for (auto& asset : assets) {
         asset->produce();  // Polymorphic call to produce() for both crops and animals
     }
+}
 
 int Farm::getDay() const {
     return day;

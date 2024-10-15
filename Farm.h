@@ -15,7 +15,6 @@ private:
     int day;                        // tracking the day
     Inventory inventory;  
     
-
 public:
     Farm();  // constructor to initialize balance and other data members
 
