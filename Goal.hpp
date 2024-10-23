@@ -3,6 +3,7 @@
 
 #include "Interactable.hpp"
 #include "Helper.hpp"
+#include "Robot.hpp"
 
 class Goal : public Interactable {
 public:
